@@ -5359,8 +5359,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_availableBuildings:
   - {fileID: 11400000, guid: 7c329efdcbfe31e46b2f08a94e29a2d8, type: 2}
+  - {fileID: 11400000, guid: 870938291d6d66b4689aad27204da2b9, type: 2}
+  - {fileID: 11400000, guid: edee246eb36398c4b9e41f75c993d4cf, type: 2}
   - {fileID: 11400000, guid: f64d1ac9fb8aae74581af0899be0cecc, type: 2}
+  - {fileID: 11400000, guid: 62962c1f142414c49bac6207046b6a7e, type: 2}
+  - {fileID: 11400000, guid: 20ab6d4e5bf89774285a140ee8866ad4, type: 2}
   - {fileID: 11400000, guid: ec533f995e5bd2a4ea70d47c8bd80af4, type: 2}
+  - {fileID: 11400000, guid: cf6859e3919e6034a8053a06dba49546, type: 2}
+  - {fileID: 11400000, guid: 06fe868a2230a924db53e2663ab11b2d, type: 2}
   m_gridLayout: {fileID: 6199217523620635722}
   m_buttonPrefab: {fileID: 3311117272807330278, guid: f5ad5ab6c96e45245b0de4548c355621, type: 3}
 --- !u!1 &5969153825284273500

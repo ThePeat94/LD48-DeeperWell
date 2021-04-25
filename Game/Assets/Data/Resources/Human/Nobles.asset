@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f586da89354984b114c3d35c578686, type: 3}
   m_Name: Nobles
   m_EditorClassIdentifier: 
-  m_initMaxValue: 0
-  m_startValue: 0
+  m_initMaxValue: 2147483647
+  m_startValue: 50
   m_icon: {fileID: 0}
   m_resourceName: 
-  m_resourceType: 0

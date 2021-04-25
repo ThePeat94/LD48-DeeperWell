@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Farmer House
   m_EditorClassIdentifier: 
   m_name: Farmer House
-  m_icon: {fileID: 21300000, guid: e5ba666331da20444a314cdecb956225, type: 3}
+  m_icon: {fileID: 21300000, guid: 3e359b0069a155344a8545c6ebef16d9, type: 3}
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_cost: 2

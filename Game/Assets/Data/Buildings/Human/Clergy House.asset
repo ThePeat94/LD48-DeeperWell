@@ -26,4 +26,10 @@ MonoBehaviour:
   - m_resourceToConsume: {fileID: 11400000, guid: 2841c926493c8a846b3eb5c1e5d64959, type: 2}
     m_consumptionPerMinute: 0.15
     m_extraInhibitants: 5
+  - m_resourceToConsume: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
+    m_consumptionPerMinute: 0.25
+    m_extraInhibitants: 10
+  - m_resourceToConsume: {fileID: 11400000, guid: e42f65d8e6e374144b7c98827b2ad7d6, type: 2}
+    m_consumptionPerMinute: 0.15
+    m_extraInhibitants: 5
   m_maxInhibitants: 20

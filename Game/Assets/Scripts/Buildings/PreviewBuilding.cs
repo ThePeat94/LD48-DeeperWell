@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace WellWellWell
@@ -19,18 +18,7 @@ namespace WellWellWell
             this.m_renderer = this.GetComponentsInChildren<MeshRenderer>();
             this.m_rendererMaterialMap = new Dictionary<MeshRenderer, Material[]>();
             foreach (var renderer in this.m_renderer)
-            {
                 this.m_rendererMaterialMap.Add(renderer, renderer.materials);
-            }
-        }
-
-        private void OnDisable()
-        {
-            Debug.Log("disabled");
-            foreach (var renderMaterialMap in this.m_rendererMaterialMap)
-            {
-                renderMaterialMap.Key.materials = renderMaterialMap.Value;
-            }
         }
 
         private void Start()
@@ -38,44 +26,47 @@ namespace WellWellWell
             this.SwapMaterials(new[] {this.m_availableMaterial});
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnDisable()
         {
-            Debug.Log("Collided with " + other.name);
-            this.SwapMaterials(new[] { this.m_unavailableMaterial });
-            this.HitObstacles = true;
+            foreach (var renderMaterialMap in this.m_rendererMaterialMap)
+                renderMaterialMap.Key.materials = renderMaterialMap.Value;
         }
 
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
+            this.SwapMaterials(new[] {this.m_unavailableMaterial});
             this.HitObstacles = true;
-            this.SwapMaterials(new[] { this.m_unavailableMaterial });
         }
 
         private void OnTriggerExit(Collider other)
         {
             this.HitObstacles = false;
-            this.SwapMaterials(new[] { this.m_availableMaterial });
+            this.SwapMaterials(new[] {this.m_availableMaterial});
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            this.HitObstacles = true;
+            this.SwapMaterials(new[] {this.m_unavailableMaterial});
         }
 
         public void TurnAvailable()
         {
             if (this.HitObstacles)
                 return;
-            
-            this.SwapMaterials(new[] { this.m_availableMaterial });
+
+            this.SwapMaterials(new[] {this.m_availableMaterial});
         }
 
         public void TurnUnavailable()
         {
-            this.SwapMaterials(new[] { this.m_unavailableMaterial });
+            this.SwapMaterials(new[] {this.m_unavailableMaterial});
         }
 
         private void SwapMaterials(Material[] materials)
         {
             foreach (var renderer in this.m_rendererMaterialMap.Keys)
-            {
                 renderer.materials = materials;
-            }
         }
     }
 }

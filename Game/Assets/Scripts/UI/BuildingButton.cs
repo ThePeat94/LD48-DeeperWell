@@ -16,6 +16,24 @@ namespace WellWellWell.UI
             this.m_button = this.GetComponent<Button>();
         }
 
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (this.m_buildingData.GetType() == typeof(ProductionBuildingData))
+                GameHUD.Instance.ShowBuildingToolTip(this.m_buildingData as ProductionBuildingData);
+            else if (this.m_buildingData.GetType() == typeof(CivilBuildingData))
+                GameHUD.Instance.ShowBuildingToolTip(this.m_buildingData as CivilBuildingData);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            GameHUD.Instance.HideBuildingToolTip();
+        }
+
+        public void OnClick()
+        {
+            MouseController.Instance.StartBuilding(this.m_buildingData);
+        }
+
         public void Show(BuildingData buildingData)
         {
             this.m_buildingData = buildingData;
@@ -27,22 +45,6 @@ namespace WellWellWell.UI
         private void HandleUnlock(object sender, System.EventArgs args)
         {
             this.m_button.interactable = true;
-        }
-        public void OnClick()
-        {
-            MouseController.Instance.StartBuilding(this.m_buildingData);
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Debug.Log("Hovering button");
-            // Show Tooltip
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Debug.Log("Button is leaving");
-            // Hide Tooltip
         }
     }
 }

@@ -17,13 +17,11 @@ MonoBehaviour:
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_cost: 5
-  - m_type: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
-    m_cost: 10
   m_toPlace: {fileID: 7617950298395849095, guid: 7accc80e1619c3049bae2ba4582811ac, type: 3}
   m_isInitiallyLocked: 1
   m_produces: {fileID: 11400000, guid: e42f65d8e6e374144b7c98827b2ad7d6, type: 2}
   m_needsToProduce: []
   m_secondsToProduce: 15
   m_workforceConsumption:
-    m_humanResource: {fileID: 0}
-    m_amount: 0
+    m_humanResource: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
+    m_amount: 5

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using TMPro;
-using UnityEditorInternal;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WellWellWell.EventArgs;
@@ -20,7 +18,7 @@ namespace WellWellWell.UI
 
         public void Hide()
         {
-            if(this.m_buildingToDisplay != null)
+            if (this.m_buildingToDisplay != null)
                 this.m_buildingToDisplay.Data.GlobalHumanResource.ResourceController.ResourceValueChanged -= this.PeasantsAmountChanged;
             this.gameObject.SetActive(false);
         }
@@ -32,11 +30,15 @@ namespace WellWellWell.UI
             this.m_buildingToDisplay.Data.GlobalHumanResource.ResourceController.ResourceValueChanged += this.PeasantsAmountChanged;
 
             if (this.m_currentShowRoutine != null)
-            {
                 this.StopCoroutine(this.m_currentShowRoutine);
-            }
-            
+
             this.UpdateInfo();
+        }
+
+        private void ClearResourceInfos()
+        {
+            foreach (Transform child in this.m_resourceInfo.transform)
+                Destroy(child.gameObject);
         }
 
         private void PeasantsAmountChanged(object sender, ResourceValueChangedEvent args)
@@ -58,14 +60,6 @@ namespace WellWellWell.UI
 
                 var instantiatedInfo = Instantiate(this.m_resourceInfoPrefab, this.m_resourceInfo.transform).GetComponent<PeasantResourceInfo>();
                 instantiatedInfo.ShowConsumption(currentExtra, consumption.ResourceToConsume.Icon, currentConsumptionPerMinute);
-            }
-        }
-
-        private void ClearResourceInfos()
-        {
-            foreach (Transform child in this.m_resourceInfo.transform)
-            {
-                Destroy(child.gameObject);
             }
         }
     }

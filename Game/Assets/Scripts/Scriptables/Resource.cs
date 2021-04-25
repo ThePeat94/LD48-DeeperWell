@@ -1,7 +1,4 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
-using WellWellWell.Util;
+﻿using UnityEngine;
 
 namespace WellWellWell
 {
@@ -13,16 +10,22 @@ namespace WellWellWell
         [SerializeField] private Sprite m_icon;
         [SerializeField] private string m_resourceName;
 
-        private ResourceController m_resourceController;
-        public int InitMaxValue => this.m_initMaxValue;
-        public int StartValue => this.m_startValue;
-        public ResourceController ResourceController => this.m_resourceController;
+        public ResourceController ResourceController { get; private set; }
+
         public Sprite Icon => this.m_icon;
         public string Name => this.m_resourceName;
 
+        private void Awake()
+        {
+            this.ResourceController = new ResourceController(this);
+        }
+
         private void OnValidate()
         {
-            this.m_resourceController = new ResourceController(this);
+            this.ResourceController = new ResourceController(this);
         }
+
+        public int InitMaxValue => this.m_initMaxValue;
+        public int StartValue => this.m_startValue;
     }
 }

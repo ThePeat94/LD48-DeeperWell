@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_initMaxValue: 2147483647
   m_startValue: 0
-  m_icon: {fileID: 21300000, guid: 51db53e461b06bf4b8ab0881defcd918, type: 3}
+  m_icon: {fileID: 21300000, guid: 9b049308c159b4b40b3c4979c6cebc2b, type: 3}
   m_resourceName: Clergy

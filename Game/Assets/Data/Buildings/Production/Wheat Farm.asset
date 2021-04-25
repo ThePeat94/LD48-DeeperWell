@@ -23,7 +23,7 @@ MonoBehaviour:
   m_isInitiallyLocked: 1
   m_produces: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
   m_needsToProduce: []
-  m_secondsToProduce: 30
+  m_secondsToProduce: 20
   m_workforceConsumption:
     m_humanResource: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
     m_amount: 10

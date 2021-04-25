@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_initMaxValue: 50
   m_startValue: 25
-  m_icon: {fileID: 21300000, guid: 941fcab6b0c9fc64995fa549465816b3, type: 3}
+  m_icon: {fileID: 21300000, guid: dde6a86e821205f499c569df5b5bb1cf, type: 3}
   m_resourceName: Water

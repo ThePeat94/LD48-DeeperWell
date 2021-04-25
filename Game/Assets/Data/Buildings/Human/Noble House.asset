@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Noble House
   m_EditorClassIdentifier: 
   m_name: Aristocrat House
-  m_icon: {fileID: 21300000, guid: d948eb03df3d91b4db902a2a0173a52f, type: 3}
+  m_icon: {fileID: 21300000, guid: f54c8c587e8f98b4b983c24bac173dc5, type: 3}
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_cost: 2
@@ -27,7 +27,7 @@ MonoBehaviour:
   m_consumptionPerInhibitant:
   - m_resourceToConsume: {fileID: 11400000, guid: 2841c926493c8a846b3eb5c1e5d64959, type: 2}
     m_consumptionPerMinute: 0.1
-    m_extraInhibitants: 7
+    m_extraInhibitants: 10
   - m_resourceToConsume: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
     m_consumptionPerMinute: 0.05
     m_extraInhibitants: 10

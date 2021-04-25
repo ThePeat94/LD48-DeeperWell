@@ -19,105 +19,110 @@ public class @PlayerInput : IInputActionCollection, IDisposable
             ""id"": ""31318777-1404-478a-926d-2557c940dbe7"",
             ""actions"": [
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Click"",
                     ""type"": ""Button"",
-                    ""id"": ""d35e711b-4713-44a7-9a73-b71533b22e7f"",
+                    ""id"": ""e2457fdf-a9c2-4448-af1b-d803a105f268"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""RightClick"",
                     ""type"": ""Button"",
-                    ""id"": ""eaa44061-bd1f-43b3-ae82-6083ca58b276"",
+                    ""id"": ""47d8c7ab-3003-4839-af35-1955fcd19dda"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Inspect"",
+                    ""name"": ""Rotate"",
                     ""type"": ""Button"",
-                    ""id"": ""c0f3be09-17f1-4d3a-a71f-5289a0cd2822"",
+                    ""id"": ""7050ec9a-2567-46a6-aeb4-9676a530f4fe"",
                     ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Destroy"",
+                    ""type"": ""Button"",
+                    ""id"": ""6f8ec8cc-9422-42d0-addf-7058e70ff93f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""48d6c548-3417-4a89-aada-5081b534e4bb"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
-                    ""name"": ""Keys"",
-                    ""id"": ""2c4be5f8-52f7-4252-ba6b-d85c26c19fd6"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""0fc86b36-f813-410a-85a4-72e731b2a40d"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""e970f0da-b3f8-4097-90f0-fa89e4eef2c6"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""ceac21aa-fd2b-4241-bff6-951da8d8b2e6"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""c7e000f5-c8df-4eea-b9a8-d92364b9312a"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
-                    ""id"": ""83e05aca-594e-4b05-8c7e-88115e2ee45d"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""b751fbfd-4d80-4afc-8f91-3064fc96c729"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d94e583d-fef5-4485-9cf3-4d5b36ef68ae"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""id"": ""631e8ab8-44cd-4cd4-a1d2-195af7e04186"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Inspect"",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e0de6df-fd3a-49e4-affd-58efae8864a3"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40fe16ba-2ec1-4e4b-8394-ed8e933f8ff1"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fee52801-eb89-457b-9147-d2a020d8f643"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Destroy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d78edee-c205-46bd-a30e-161946df999e"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -128,9 +133,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
 }");
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
-        m_Actions_Move = m_Actions.FindAction("Move", throwIfNotFound: true);
-        m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
-        m_Actions_Inspect = m_Actions.FindAction("Inspect", throwIfNotFound: true);
+        m_Actions_Click = m_Actions.FindAction("Click", throwIfNotFound: true);
+        m_Actions_RightClick = m_Actions.FindAction("RightClick", throwIfNotFound: true);
+        m_Actions_Rotate = m_Actions.FindAction("Rotate", throwIfNotFound: true);
+        m_Actions_Destroy = m_Actions.FindAction("Destroy", throwIfNotFound: true);
+        m_Actions_MousePosition = m_Actions.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,16 +187,20 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     // Actions
     private readonly InputActionMap m_Actions;
     private IActionsActions m_ActionsActionsCallbackInterface;
-    private readonly InputAction m_Actions_Move;
-    private readonly InputAction m_Actions_Interact;
-    private readonly InputAction m_Actions_Inspect;
+    private readonly InputAction m_Actions_Click;
+    private readonly InputAction m_Actions_RightClick;
+    private readonly InputAction m_Actions_Rotate;
+    private readonly InputAction m_Actions_Destroy;
+    private readonly InputAction m_Actions_MousePosition;
     public struct ActionsActions
     {
         private @PlayerInput m_Wrapper;
         public ActionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Actions_Move;
-        public InputAction @Interact => m_Wrapper.m_Actions_Interact;
-        public InputAction @Inspect => m_Wrapper.m_Actions_Inspect;
+        public InputAction @Click => m_Wrapper.m_Actions_Click;
+        public InputAction @RightClick => m_Wrapper.m_Actions_RightClick;
+        public InputAction @Rotate => m_Wrapper.m_Actions_Rotate;
+        public InputAction @Destroy => m_Wrapper.m_Actions_Destroy;
+        public InputAction @MousePosition => m_Wrapper.m_Actions_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -199,36 +210,50 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_ActionsActionsCallbackInterface != null)
             {
-                @Move.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMove;
-                @Interact.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInteract;
-                @Inspect.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
-                @Inspect.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
-                @Inspect.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnInspect;
+                @Click.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @RightClick.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @Rotate.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Destroy.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @Destroy.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @Destroy.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @MousePosition.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
             }
             m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
-                @Inspect.started += instance.OnInspect;
-                @Inspect.performed += instance.OnInspect;
-                @Inspect.canceled += instance.OnInspect;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @Destroy.started += instance.OnDestroy;
+                @Destroy.performed += instance.OnDestroy;
+                @Destroy.canceled += instance.OnDestroy;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
             }
         }
     }
     public ActionsActions @Actions => new ActionsActions(this);
     public interface IActionsActions
     {
-        void OnMove(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
-        void OnInspect(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
+        void OnDestroy(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UI
+namespace WellWellWell.UI
 {
     public class MainMenu : MonoBehaviour
     {

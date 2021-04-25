@@ -1,67 +1,104 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using EventArgs;
-using Scriptables;
 using UnityEngine;
+using WellWellWell.EventArgs;
+using WellWellWell.Scriptables;
 
-public class ResourceController
+namespace WellWellWell
 {
-    private float m_currentValue;
-    private EventHandler<ResourceValueChangedEventArgs> m_resourceValueChanged;
-    private EventHandler<ResourceValueChangedEventArgs> m_maxValueChanged;
-    
-    public ResourceController(ResourceData data)
+    public class ResourceController
     {
-        this.MaxValue = data.InitMaxValue;
-        this.m_currentValue = data.StartValue;
-    }
-    
-    public float CurrentValue => this.m_currentValue;
-    public float MaxValue { get; set; }
-    
-    public event EventHandler<ResourceValueChangedEventArgs> ResourceValueChanged
-    {
-        add => this.m_resourceValueChanged += value;
-        remove => this.m_resourceValueChanged -= value;
-    }
-    
-    public event EventHandler<ResourceValueChangedEventArgs> MaxValueChanged
-    {
-        add => this.m_maxValueChanged += value;
-        remove => this.m_maxValueChanged -= value;
-    }
-    
-    public void ResetValue()
-    {
-        this.m_currentValue = this.MaxValue;
-        this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEventArgs(this.m_currentValue));
-    }
-    
-    public bool UseResource(float amount)
-    {
-        if(!this.CanAfford(amount))
-            return false;
+        private EventHandler<ResourceValueChangedEvent> m_maxValueChanged;
+        private EventHandler<ResourceValueChangedEvent> m_resourceValueChanged;
 
-        this.m_currentValue -= amount;
-        this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEventArgs(this.m_currentValue));
-        return true;
-    }
-    
-    public bool CanAfford(float amount)
-    {
-        return this.m_currentValue > 0 && amount <= this.m_currentValue;
-    }
+        private object m_lock;
 
-    public void Add(float value)
-    {
-        this.m_currentValue += value;
-        this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEventArgs(this.m_currentValue));
-    }
+        public ResourceController(IResourceData data)
+        {
+            this.MaxValue = data.InitMaxValue;
+            this.CurrentValue = data.StartValue;
+            this.m_lock = new object();
+        }
 
-    public void IncreaseMaximum(float value)
-    {
-        this.MaxValue += value;
-        this.m_maxValueChanged?.Invoke(this, new ResourceValueChangedEventArgs(this.MaxValue));
+        public float CurrentValue { get; private set; }
+        public float MaxValue { get; private set; }
+
+        public void Add(float value)
+        {
+            if(value < 0)
+                throw new ArgumentException($"{nameof(value)} is less than 0");
+            
+            lock(this.m_lock)
+                this.CurrentValue = Mathf.Clamp(this.CurrentValue + value, 0, this.MaxValue);
+            this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
+        }
+
+        public void SetValue(float value)
+        {
+            if(value < 0)
+                throw new ArgumentException($"{nameof(value)} is less than 0");
+            
+            lock(this.m_lock)
+                this.CurrentValue = Mathf.Clamp(value, 0, this.MaxValue);
+            this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
+        }
+        
+        public bool CanAfford(float amount)
+        {
+            if(amount < 0)
+                throw new ArgumentException($"{nameof(amount)} is less than 0");
+            
+            lock(this.m_lock)
+                return this.CurrentValue > 0 && amount <= this.CurrentValue;
+        }
+
+        public void IncreaseMaximum(float value)
+        {
+            if(value < 0)
+                throw new ArgumentException($"{nameof(value)} is less than 0");
+            
+            lock(this.m_lock)
+                this.MaxValue += value;
+            this.m_maxValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.MaxValue));
+        }
+
+        public void ResetValue()
+        {
+            this.CurrentValue = this.MaxValue;
+            this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
+        }
+
+        public bool TryUseResource(float amount)
+        {
+            if(amount < 0)
+                throw new ArgumentException($"{nameof(amount)} is less than 0");
+
+            lock (this.m_lock)
+            {
+                if (amount > this.CurrentValue)
+                    return false;
+                this.CurrentValue -= amount;
+            }
+            this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
+            return true;
+        }
+
+        public void CalulateDelta(float amount)
+        {
+            lock (this.m_lock)
+                this.CurrentValue += amount;
+            this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
+        }
+
+        public event EventHandler<ResourceValueChangedEvent> ResourceValueChanged
+        {
+            add => this.m_resourceValueChanged += value;
+            remove => this.m_resourceValueChanged -= value;
+        }
+
+        public event EventHandler<ResourceValueChangedEvent> MaxValueChanged
+        {
+            add => this.m_maxValueChanged += value;
+            remove => this.m_maxValueChanged -= value;
+        }
     }
 }

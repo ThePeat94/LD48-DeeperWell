@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423f671677814cb8ad0aa623e4e1fa40, type: 3}
   m_Name: Wine Farm
   m_EditorClassIdentifier: 
-  m_name: Wheat Farm
+  m_name: Wine Farm
   m_icon: {fileID: 21300000, guid: 64aa83d905c69104dbf4c1308669b8ae, type: 3}
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
@@ -20,7 +20,7 @@ MonoBehaviour:
   - m_type: {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
     m_cost: 3
   m_toPlace: {fileID: 108535947233234156, guid: d97c27ad890e6c34b871c7e29f705a65, type: 3}
-  m_isInitiallyLocked: 0
+  m_isInitiallyLocked: 1
   m_produces: {fileID: 11400000, guid: 50b874a55bad7c445950e6622c74329b, type: 2}
   m_needsToProduce: []
   m_secondsToProduce: 45

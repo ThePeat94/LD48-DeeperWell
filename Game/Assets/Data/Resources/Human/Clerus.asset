@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Clerus
   m_EditorClassIdentifier: 
   m_initMaxValue: 2147483647
-  m_startValue: 50
-  m_icon: {fileID: 0}
-  m_resourceName: 
+  m_startValue: 0
+  m_icon: {fileID: 21300000, guid: 51db53e461b06bf4b8ab0881defcd918, type: 3}
+  m_resourceName: Clergy

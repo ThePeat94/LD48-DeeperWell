@@ -9,13 +9,13 @@ namespace Scriptables
         [SerializeField] private WellUpgradeData m_followingUpgrade;
         [SerializeField] private ResourceUnlockCondition[] m_resourceUnlockConditions;
         [SerializeField] private PopulationUnlockCondition[] m_populationUnlockConditions;
-        [SerializeField] private ProductionBuildingData[] m_buildingsToUnlock;
+        [SerializeField] private BuildingData[] m_buildingsToUnlock;
         [SerializeField] private float m_newProductionTime;
 
         public WellUpgradeData FollowingUpgrade => this.m_followingUpgrade;
         public ResourceUnlockCondition[] ResourceUnlockConditions => this.m_resourceUnlockConditions;
         public PopulationUnlockCondition[] PopulationUnlockConditions => this.m_populationUnlockConditions;
-        public ProductionBuildingData[] BuildingsToUnlock => this.m_buildingsToUnlock;
+        public BuildingData[] BuildingsToUnlock => this.m_buildingsToUnlock;
         public float NewProductionTime => this.m_newProductionTime;
     }
 }

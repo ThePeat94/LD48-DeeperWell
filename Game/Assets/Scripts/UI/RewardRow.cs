@@ -11,7 +11,7 @@ namespace WellWellWell.UI
         [SerializeField] private Image m_image;
         [SerializeField] private Sprite m_timerIcon;
 
-        public void Show(ProductionBuildingData toShow)
+        public void Show(BuildingData toShow)
         {
             this.m_rewardText.text = toShow.Name;
             this.m_image.sprite = toShow.Icon;

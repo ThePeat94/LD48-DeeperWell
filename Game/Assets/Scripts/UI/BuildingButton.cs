@@ -9,10 +9,17 @@ namespace WellWellWell.UI
     {
         [SerializeField] private BuildingData m_buildingData;
         [SerializeField] private Button m_button;
+        [SerializeField] private Image m_icon;
 
         private void Awake()
         {
             this.m_button = this.GetComponent<Button>();
+        }
+
+        public void Show(BuildingData buildingData)
+        {
+            this.m_buildingData = buildingData;
+            this.m_icon.sprite = buildingData.Icon;
             this.m_buildingData.Unlocked += this.HandleUnlock;
             this.m_button.interactable = !this.m_buildingData.IsInitiallyLocked;
         }

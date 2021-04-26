@@ -1,23 +1,21 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using WellWellWell.EventArgs;
 
 namespace WellWellWell.UI
 {
     public class ResourceUI : MonoBehaviour
     {
-        [SerializeField] private Resource m_resourceToDisplay;
         [SerializeField] private TextMeshProUGUI m_text;
+        [SerializeField] private Image m_icon;
 
-        private void Awake()
-        {
-            this.m_resourceToDisplay.ResourceController.ResourceValueChanged += this.ResourceValueChanged;
-        }
 
-        private void Start()
+        public void Show(Resource toShow)
         {
-            this.m_text.text = $"{this.m_resourceToDisplay.ResourceController.CurrentValue:0}";
+            this.m_text.text = $"{toShow.ResourceController.CurrentValue:0}";
+            this.m_icon.sprite = toShow.Icon;
+            toShow.ResourceController.ResourceValueChanged += this.ResourceValueChanged;
         }
 
         private void ResourceValueChanged(object sender, ResourceValueChangedEvent args)

@@ -16,10 +16,16 @@ namespace WellWellWell.UI
         private CivilBuilding m_buildingToDisplay;
         private Coroutine m_currentShowRoutine;
 
+        public void DestructBuilding()
+        {
+            this.Hide();
+            this.m_buildingToDisplay.Destruct();
+        }
+
         public void Hide()
         {
             if (this.m_buildingToDisplay != null)
-                this.m_buildingToDisplay.Data.GlobalHumanResource.ResourceController.ResourceValueChanged -= this.PeasantsAmountChanged;
+                this.m_buildingToDisplay.Data.Resource.ResourceController.ResourceValueChanged -= this.PeasantsAmountChanged;
             this.gameObject.SetActive(false);
         }
 
@@ -27,13 +33,14 @@ namespace WellWellWell.UI
         {
             this.gameObject.SetActive(true);
             this.m_buildingToDisplay = building;
-            this.m_buildingToDisplay.Data.GlobalHumanResource.ResourceController.ResourceValueChanged += this.PeasantsAmountChanged;
+            this.m_buildingToDisplay.Data.Resource.ResourceController.ResourceValueChanged += this.PeasantsAmountChanged;
 
             if (this.m_currentShowRoutine != null)
                 this.StopCoroutine(this.m_currentShowRoutine);
 
             this.UpdateInfo();
         }
+
 
         private void ClearResourceInfos()
         {

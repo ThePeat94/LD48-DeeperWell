@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423f671677814cb8ad0aa623e4e1fa40, type: 3}
   m_Name: Brickworks
   m_EditorClassIdentifier: 
+  m_resource: {fileID: 11400000, guid: 9824db68f10591a4d97e41658962901a, type: 2}
   m_name: Brickworks
   m_icon: {fileID: 21300000, guid: bf862ac2cc12bb146a7604063a6b859f, type: 3}
   m_costs:
@@ -21,7 +22,6 @@ MonoBehaviour:
     m_cost: 10
   m_toPlace: {fileID: 3307389017219113975, guid: 1b4c12844f2e2ac469e4de3e9bfdd087, type: 3}
   m_isInitiallyLocked: 1
-  m_produces: {fileID: 11400000, guid: 9824db68f10591a4d97e41658962901a, type: 2}
   m_needsToProduce:
   - {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
   - {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}

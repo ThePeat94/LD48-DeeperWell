@@ -9,43 +9,38 @@ namespace WellWellWell
     {
         [SerializeField] private WellUpgradeData m_wellUpgradeData;
 
-        private int m_currentLevel;
-
         public WellUpgradeData CurrentUpgradeInfo => this.m_wellUpgradeData;
-        public int CurrentLevel => this.m_currentLevel;
+        public int CurrentLevel { get; private set; }
 
-        public void UpgradeToNextLevel()
+        public bool CanUpgrade()
         {
-            if (this.CanUpgrade())
-            {
-                foreach (var resourceUnlockCondition in this.m_wellUpgradeData.ResourceUnlockConditions)
-                {
-                    resourceUnlockCondition.Resource.ResourceController.TryUseResource(resourceUnlockCondition.Amount);
-                }
-            }
-            
-            this.m_currentProductionTimer = this.m_wellUpgradeData.NewProductionTime;
-
-            foreach (var buildingToUnlock in this.m_wellUpgradeData.BuildingsToUnlock)
-            {
-                buildingToUnlock.Unlock();
-            }
-
-            this.m_currentLevel++;
-            this.m_wellUpgradeData = this.m_wellUpgradeData.FollowingUpgrade;
+            var canAffordResources = this.m_wellUpgradeData.ResourceUnlockConditions.All(r => r.Resource.ResourceController.CanAfford(r.Amount));
+            var populationReached = this.m_wellUpgradeData.PopulationUnlockConditions.All(r => HouseManager.Instance.GetInhabitantsForResource(r.PopulationResource) >= r.NeededAmount);
+            return canAffordResources && populationReached;
         }
-        
+
+        public override void Destruct()
+        {
+        }
+
         public override void ShowUI()
         {
             GameHUD.Instance.ShowWellUI(this);
         }
 
-        public bool CanUpgrade()
+        public void UpgradeToNextLevel()
         {
-            var canAffordResources = this.m_wellUpgradeData.ResourceUnlockConditions.All(r => r.Resource.ResourceController.CanAfford(r.Amount));
-            var populationReached  = this.m_wellUpgradeData.PopulationUnlockConditions.All(r => r.PopulationResource.ResourceController.CanAfford(r.NeededAmount));
+            if (this.CanUpgrade())
+                foreach (var resourceUnlockCondition in this.m_wellUpgradeData.ResourceUnlockConditions)
+                    resourceUnlockCondition.Resource.ResourceController.TryUseResource(resourceUnlockCondition.Amount);
 
-            return canAffordResources && populationReached;
+            this.m_currentProductionTimer = this.m_wellUpgradeData.NewProductionTime;
+
+            foreach (var buildingToUnlock in this.m_wellUpgradeData.BuildingsToUnlock)
+                buildingToUnlock.Unlock();
+
+            this.CurrentLevel++;
+            this.m_wellUpgradeData = this.m_wellUpgradeData.FollowingUpgrade;
         }
     }
 }

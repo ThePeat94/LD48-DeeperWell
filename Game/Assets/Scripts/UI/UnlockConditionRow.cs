@@ -15,11 +15,11 @@ namespace WellWellWell.UI
             this.m_image.sprite = condition.Resource.Icon;
             this.m_unlockCondition.text = $"{condition.Resource.ResourceController.CurrentValue:0} / {condition.Amount:0}";
         }
-        
+
         public void Show(PopulationUnlockCondition condition)
         {
             this.m_image.sprite = condition.PopulationResource.Icon;
-            this.m_unlockCondition.text = $"{condition.PopulationResource.ResourceController.CurrentValue:0} / {condition.NeededAmount:0}";
+            this.m_unlockCondition.text = $"{HouseManager.Instance.GetInhabitantsForResource(condition.PopulationResource):0} / {condition.NeededAmount:0}";
         }
     }
 }

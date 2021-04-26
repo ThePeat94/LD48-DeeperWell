@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02f586da89354984b114c3d35c578686, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  m_initMaxValue: 50
+  m_initMaxValue: 100
   m_startValue: 25
   m_icon: {fileID: 21300000, guid: af8fe14468f16d84f97cfefcab5d932c, type: 3}
   m_resourceName: Wood

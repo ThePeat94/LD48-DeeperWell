@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 423f671677814cb8ad0aa623e4e1fa40, type: 3}
   m_Name: PotatoFarm
   m_EditorClassIdentifier: 
+  m_resource: {fileID: 11400000, guid: e42f65d8e6e374144b7c98827b2ad7d6, type: 2}
   m_name: Potato Farm
   m_icon: {fileID: 21300000, guid: 20be5555072ed004eb24d76ebe64c673, type: 3}
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_cost: 5
   m_toPlace: {fileID: 9055291348230606192, guid: dbe7c71b3b3f9ab44a98ecfef7c66e45, type: 3}
-  m_isInitiallyLocked: 0
-  m_produces: {fileID: 11400000, guid: e42f65d8e6e374144b7c98827b2ad7d6, type: 2}
+  m_isInitiallyLocked: 1
   m_needsToProduce: []
   m_secondsToProduce: 15
   m_workforceConsumption:

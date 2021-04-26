@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Linq;
 using Scriptables;
 using UnityEngine;
@@ -11,13 +10,13 @@ namespace WellWellWell
     {
         [SerializeField] private ProductionBuildingData m_data;
 
-        private WaitForSeconds m_waitForSeconds;
-        private Coroutine m_productionRoutine;
-        private bool m_isPaused;
-        
         protected float m_currentProductionTimer;
+        private Coroutine m_productionRoutine;
 
-        public bool IsPaused => this.m_isPaused;
+        private WaitForSeconds m_waitForSeconds;
+
+        public bool IsPaused { get; private set; }
+
         public ProductionBuildingData Data => this.m_data;
 
         public float CurrentProductionTimer => this.m_currentProductionTimer;
@@ -30,10 +29,34 @@ namespace WellWellWell
 
         private void Update()
         {
-            if (this.m_productionRoutine == null && !this.m_isPaused)
-            {
+            if (this.m_productionRoutine == null && !this.IsPaused)
                 this.m_productionRoutine = this.StartCoroutine(this.Produce());
-            }
+        }
+
+        public void Continue()
+        {
+            this.IsPaused = false;
+            var workforceConsumption = this.m_data.WorkforceConsumption;
+            workforceConsumption.HumanResource.ResourceController.CalulateDelta(-workforceConsumption.Amount);
+        }
+
+        public override void Destruct()
+        {
+            foreach (var cost in this.m_data.Costs)
+                cost.Type.ResourceController.Add(cost.Cost);
+
+            this.StopCoroutine(this.m_productionRoutine);
+            this.m_data.WorkforceConsumption.HumanResource.ResourceController.Add(this.m_data.WorkforceConsumption.Amount);
+            Destroy(this.gameObject);
+        }
+
+        public void Pause()
+        {
+            this.IsPaused = true;
+            this.StopCoroutine(this.m_productionRoutine);
+            this.m_productionRoutine = null;
+            var workforceConsumption = this.m_data.WorkforceConsumption;
+            workforceConsumption.HumanResource.ResourceController.CalulateDelta(workforceConsumption.Amount);
         }
 
         public override void ShowUI()
@@ -43,26 +66,10 @@ namespace WellWellWell
 
         public void ToggleProduction()
         {
-            if(this.m_isPaused)
+            if (this.IsPaused)
                 this.Continue();
             else
                 this.Pause();
-        }
-        
-        public void Pause()
-        {
-            this.m_isPaused = true;
-            this.StopCoroutine(this.m_productionRoutine);
-            this.m_productionRoutine = null;
-            var workforceConsumption = this.m_data.WorkforceConsumption;
-            workforceConsumption.HumanResource.ResourceController.CalulateDelta(workforceConsumption.Amount);
-        }
-
-        public void Continue()
-        {
-            this.m_isPaused = false;
-            var workforceConsumption = this.m_data.WorkforceConsumption;
-            workforceConsumption.HumanResource.ResourceController.CalulateDelta(-workforceConsumption.Amount);
         }
 
         private IEnumerator Produce()
@@ -74,14 +81,13 @@ namespace WellWellWell
                     this.m_productionRoutine = null;
                     yield break;
                 }
+
                 foreach (var consuming in this.m_data.NeedsToProduce)
-                {
                     consuming.ResourceController.TryUseResource(1);
-                }
             }
 
             yield return this.m_waitForSeconds;
-            this.m_data.Produces.ResourceController.Add(1);
+            this.m_data.Resource.ResourceController.Add(1);
             this.m_productionRoutine = null;
         }
     }

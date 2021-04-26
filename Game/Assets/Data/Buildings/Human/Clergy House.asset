@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e7f7ba92024fe189e143cf33c88a71, type: 3}
   m_Name: Clergy House
   m_EditorClassIdentifier: 
+  m_resource: {fileID: 11400000, guid: 849a09153e6d1cf4d90eadddeff4121c, type: 2}
   m_name: Clergy House
   m_icon: {fileID: 21300000, guid: 9b049308c159b4b40b3c4979c6cebc2b, type: 3}
   m_costs:
@@ -19,12 +20,11 @@ MonoBehaviour:
     m_cost: 2
   - m_type: {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
     m_cost: 2
-  m_toPlace: {fileID: 0}
+  m_toPlace: {fileID: 5144992293064146230, guid: fe3f1243052fbf44288dd84dff2b153e, type: 3}
   m_isInitiallyLocked: 1
-  m_globalHumanResource: {fileID: 11400000, guid: 849a09153e6d1cf4d90eadddeff4121c, type: 2}
   m_consumptionPerInhibitant:
   - m_resourceToConsume: {fileID: 11400000, guid: 2841c926493c8a846b3eb5c1e5d64959, type: 2}
-    m_consumptionPerMinute: 0.15
+    m_consumptionPerMinute: 0.05
     m_extraInhibitants: 5
   - m_resourceToConsume: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
     m_consumptionPerMinute: 0.075

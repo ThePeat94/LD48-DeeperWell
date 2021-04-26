@@ -10,6 +10,12 @@ namespace WellWellWell.UI
         [SerializeField] private CivilBuildingUI m_civilBuildingUI;
         [SerializeField] private WellUI m_wellUI;
         [SerializeField] private BuildingTooltip m_buildingTooltip;
+        [SerializeField] private BuildingData[] m_buildings;
+        [SerializeField] private GameObject m_storageDisplayPrefab;
+        [SerializeField] private GameObject m_storageLayout;
+        [SerializeField] private GameObject m_separatorImagePrefab;
+        [SerializeField] private StreetUI m_streetUI;
+
 
         public static GameHUD Instance
         {
@@ -31,7 +37,14 @@ namespace WellWellWell.UI
             else
             {
                 Destroy(this);
+                return;
             }
+
+            foreach (var building in this.m_buildings)
+                if (building.IsInitiallyLocked)
+                    building.Unlocked += (sender, args) => this.ShowStorageDisplayForResource(building.Resource);
+                else
+                    this.ShowStorageDisplayForResource(building.Resource);
         }
 
         public void HideBuildingToolTip()
@@ -53,6 +66,7 @@ namespace WellWellWell.UI
         {
             this.m_productionBuildingUI.Hide();
             this.m_wellUI.Hide();
+            this.m_streetUI.Hide();
             this.m_civilBuildingUI.Show(toShow);
         }
 
@@ -60,14 +74,31 @@ namespace WellWellWell.UI
         {
             this.m_civilBuildingUI.Hide();
             this.m_wellUI.Hide();
+            this.m_streetUI.Hide();
             this.m_productionBuildingUI.Show(toShow);
+        }
+
+        public void ShowStreetUI(StreetBuilding street)
+        {
+            this.m_productionBuildingUI.Hide();
+            this.m_civilBuildingUI.Hide();
+            this.m_wellUI.Hide();
+            this.m_streetUI.Show(street);
         }
 
         public void ShowWellUI(Well well)
         {
             this.m_productionBuildingUI.Hide();
             this.m_civilBuildingUI.Hide();
+            this.m_streetUI.Hide();
             this.m_wellUI.Show(well);
+        }
+
+        private void ShowStorageDisplayForResource(Resource toShow)
+        {
+            var newStorageDisplay = Instantiate(this.m_storageDisplayPrefab, this.m_storageLayout.transform).GetComponent<ResourceUI>();
+            newStorageDisplay.Show(toShow);
+            Instantiate(this.m_separatorImagePrefab, this.m_storageLayout.transform);
         }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f77b5c3a9c4119abafbcdbbf12af5c, type: 3}
+  m_Name: Dirt Street
+  m_EditorClassIdentifier: 
+  m_resource: {fileID: 0}
+  m_name: Dirt Street
+  m_icon: {fileID: 21300000, guid: 89b83d2b006db5a478877ce991b37988, type: 3}
+  m_costs: []
+  m_toPlace: {fileID: 5563517856699955164, guid: a94631710aa9a514bb1183883d01c4e6, type: 3}
+  m_isInitiallyLocked: 0

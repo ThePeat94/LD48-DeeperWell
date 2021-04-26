@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5380a8a5a6044efeaf41022813f13b45, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  m_followingUpgrade: {fileID: 0}
+  m_followingUpgrade: {fileID: 11400000, guid: 520560f6af9a20a4daa23db86f4e14b7, type: 2}
   m_resourceUnlockConditions:
   - m_resource: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_amount: 10
@@ -23,4 +23,5 @@ MonoBehaviour:
     m_neededAmount: 75
   m_buildingsToUnlock:
   - {fileID: 11400000, guid: 870938291d6d66b4689aad27204da2b9, type: 2}
+  - {fileID: 11400000, guid: f685691ecb69a714fae1ea7b93737c08, type: 2}
   m_newProductionTime: 12

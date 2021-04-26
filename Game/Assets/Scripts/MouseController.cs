@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Scriptables;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using WellWellWell.Interface;
 
@@ -19,12 +20,11 @@ namespace WellWellWell
         [SerializeField] private InputProcessor m_inputProcessor;
         [SerializeField] private LayerMask m_constructionLayers;
         [SerializeField] private LayerMask m_selectionLayer;
+
         private BuildingData m_currentBuildingToPlace;
-
+        private float m_currentRotation;
         private MouseState m_currentState;
-
         private PreviewBuilding m_previewBuilding;
-        private Grid m_worldGrid;
 
         public static MouseController Instance
         {
@@ -51,7 +51,6 @@ namespace WellWellWell
             }
 
             this.m_currentState = MouseState.NORMAL;
-            this.m_worldGrid = FindObjectOfType<Grid>();
         }
 
         private void Update()
@@ -62,30 +61,49 @@ namespace WellWellWell
                 return;
             }
 
-            if (this.m_currentState == MouseState.BUILDING && this.m_previewBuilding != null)
-            {
-                this.UpdatePreviewPosition();
-                var resourceCosts = this.m_currentBuildingToPlace.Costs;
-                var canBeBuilt = resourceCosts.All(c => c.Type.ResourceController.CanAfford(c.Cost));
-                if (canBeBuilt)
-                    this.m_previewBuilding.TurnAvailable();
-                else
-                    this.m_previewBuilding.TurnUnavailable();
-            }
+            if (this.m_currentState == MouseState.BUILDING)
+                if (this.m_previewBuilding != null)
+                {
+                    if (this.m_inputProcessor.RotateTriggered)
+                    {
+                        this.m_currentRotation += 90f;
+                        this.m_previewBuilding.transform.Rotate(Vector3.up, 90f);
+                    }
 
-            if (this.m_inputProcessor.LeftClickTriggered && this.m_currentState == MouseState.BUILDING && this.m_currentBuildingToPlace != null && !this.m_previewBuilding.HitObstacles)
-            {
-                var resourceCosts = this.m_currentBuildingToPlace.Costs;
-                var canBeBuilt = resourceCosts.All(c => c.Type.ResourceController.CanAfford(c.Cost));
-                if (!canBeBuilt)
-                    return;
+                    this.UpdatePreviewPosition();
 
-                this.PlaceCurrentBuilding();
-                return;
-            }
+                    var resourceCosts = this.m_currentBuildingToPlace.Costs;
+                    var canBeBuilt = resourceCosts.All(c => c.Type.ResourceController.CanAfford(c.Cost));
+                    if (this.m_currentBuildingToPlace.GetType() == typeof(ProductionBuildingData))
+                    {
+                        var productionBuildingData = this.m_currentBuildingToPlace as ProductionBuildingData;
+                        var canAffordWorkforce = productionBuildingData.WorkforceConsumption.HumanResource.ResourceController.CanAfford(productionBuildingData.WorkforceConsumption.Amount);
+                        canBeBuilt = canAffordWorkforce && canBeBuilt;
+                    }
+
+                    if (canBeBuilt)
+                        this.m_previewBuilding.TurnAvailable();
+                    else
+                        this.m_previewBuilding.TurnUnavailable();
+
+                    if (this.m_inputProcessor.LeftClickTriggered && !this.m_previewBuilding.HitObstacles)
+                    {
+                        if (EventSystem.current.IsPointerOverGameObject())
+                            return;
+
+                        if (!canBeBuilt)
+                            return;
+
+                        this.PlaceCurrentBuilding();
+                        return;
+                    }
+                }
 
             if (this.m_inputProcessor.LeftClickTriggered && this.m_currentState == MouseState.NORMAL)
             {
+                if (EventSystem.current.IsPointerOverGameObject())
+                    return;
+
                 var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
                 if (Physics.Raycast(ray, out var hit, Mathf.Infinity, this.m_selectionLayer))
                     hit.collider.GetComponent<IClickable>().ShowUI();
@@ -126,10 +144,18 @@ namespace WellWellWell
             {
                 foreach (var buildingCost in this.m_currentBuildingToPlace.Costs)
                     buildingCost.Type.ResourceController.TryUseResource(buildingCost.Cost);
+
+                if (this.m_currentBuildingToPlace.GetType() == typeof(ProductionBuildingData))
+                {
+                    var productionBuildingData = this.m_currentBuildingToPlace as ProductionBuildingData;
+                    productionBuildingData.WorkforceConsumption.HumanResource.ResourceController.TryUseResource(productionBuildingData.WorkforceConsumption.Amount);
+                }
+
                 var gridPos = this.GetGridPos(hit.point);
                 var go = Instantiate(this.m_currentBuildingToPlace.ToPlace, gridPos, Quaternion.identity);
                 Destroy(go.GetComponent<PreviewBuilding>());
                 go.GetComponent<Building>().enabled = true;
+                go.transform.Rotate(Vector3.up, this.m_currentRotation);
                 this.StopBuilding();
             }
         }
@@ -140,6 +166,7 @@ namespace WellWellWell
             this.m_currentState = MouseState.NORMAL;
             Destroy(this.m_previewBuilding.gameObject);
             this.m_previewBuilding = null;
+            this.m_currentRotation = 0f;
         }
 
         private void UpdatePreviewPosition()

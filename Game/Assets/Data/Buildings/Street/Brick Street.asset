@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_resource: {fileID: 0}
   m_name: Brick Street
-  m_icon: {fileID: 21300000, guid: 89b83d2b006db5a478877ce991b37988, type: 3}
-  m_costs: []
+  m_icon: {fileID: 21300000, guid: dad71014d20cfcd46ac519d7ebd6208e, type: 3}
+  m_costs:
+  - m_type: {fileID: 11400000, guid: 9824db68f10591a4d97e41658962901a, type: 2}
+    m_cost: 1
   m_toPlace: {fileID: 6391946434054531579, guid: 740e6c8c87426e54c8478082e0d940ac, type: 3}
   m_isInitiallyLocked: 1

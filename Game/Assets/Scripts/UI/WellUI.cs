@@ -7,11 +7,11 @@ namespace WellWellWell.UI
 {
     public class WellUI : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI m_title;
         [SerializeField] private GameObject m_unlockConditionsGrid;
         [SerializeField] private GameObject m_unlockConditionPrefab;
         [SerializeField] private Button m_unlockButton;
         [SerializeField] private TextMeshProUGUI m_productionTimeText;
-        [SerializeField] private TextMeshProUGUI m_levelText;
         [SerializeField] private GameObject m_rewardsGrid;
         [SerializeField] private GameObject m_rewardRowPrefab;
 
@@ -130,8 +130,8 @@ namespace WellWellWell.UI
                 this.UpdateRewardsInfo();
             }
 
-            this.m_levelText.text = $"Level {this.m_well.CurrentLevel}";
-            this.m_productionTimeText.text = $"{this.m_well.CurrentProductionTimer:F}";
+            this.m_title.text = $"Well (Lv. {this.m_well.CurrentLevel})";
+            this.m_productionTimeText.text = $"in {this.m_well.CurrentProductionTimer:F2} s";
         }
     }
 }

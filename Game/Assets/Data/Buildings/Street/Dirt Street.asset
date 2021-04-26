@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_resource: {fileID: 0}
   m_name: Dirt Street
-  m_icon: {fileID: 21300000, guid: 89b83d2b006db5a478877ce991b37988, type: 3}
-  m_costs: []
+  m_icon: {fileID: 21300000, guid: fe1d412acdd9a6d4ea51afcba1d1903c, type: 3}
+  m_costs:
+  - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
+    m_cost: 1
   m_toPlace: {fileID: 5563517856699955164, guid: a94631710aa9a514bb1183883d01c4e6, type: 3}
   m_isInitiallyLocked: 0

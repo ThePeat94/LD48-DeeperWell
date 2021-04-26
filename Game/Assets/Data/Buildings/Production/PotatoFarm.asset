@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_resource: {fileID: 11400000, guid: e42f65d8e6e374144b7c98827b2ad7d6, type: 2}
   m_name: Potato Farm
-  m_icon: {fileID: 21300000, guid: 20be5555072ed004eb24d76ebe64c673, type: 3}
+  m_icon: {fileID: 21300000, guid: 0e313e0265831cc42a1db527c4565327, type: 3}
   m_costs:
   - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
     m_cost: 5

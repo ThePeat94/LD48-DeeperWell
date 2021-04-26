@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_resource: {fileID: 0}
   m_name: Stone Street
-  m_icon: {fileID: 21300000, guid: 89b83d2b006db5a478877ce991b37988, type: 3}
-  m_costs: []
+  m_icon: {fileID: 21300000, guid: 209ec7228ae14ef4699beacce8403aeb, type: 3}
+  m_costs:
+  - m_type: {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
+    m_cost: 1
   m_toPlace: {fileID: 1925193920828981989, guid: ec58f41a71d199349bc57c9dade835c8, type: 3}
   m_isInitiallyLocked: 1

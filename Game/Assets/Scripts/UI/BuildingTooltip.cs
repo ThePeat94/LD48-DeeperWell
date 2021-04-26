@@ -48,6 +48,13 @@ namespace WellWellWell.UI
             this.m_maxInhabitantsInfo.text = $"{toShow.MaxInhibitants}";
         }
 
+        public void Show(BuildingData toShow)
+        {
+            this.m_civilBuildingInfo.SetActive(false);
+            this.m_productionInfo.SetActive(false);
+            this.ShowGeneralInfo(toShow);
+        }
+
         private void ClearCostGrid()
         {
             foreach (Transform child in this.m_costGrid.transform)

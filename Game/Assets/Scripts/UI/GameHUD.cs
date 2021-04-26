@@ -62,6 +62,11 @@ namespace WellWellWell.UI
             this.m_buildingTooltip.Show(toShow);
         }
 
+        public void ShowBuildingToolTip(BuildingData toShow)
+        {
+            this.m_buildingTooltip.Show(toShow);
+        }
+
         public void ShowCivilBuildingUI(CivilBuilding toShow)
         {
             this.m_productionBuildingUI.Hide();

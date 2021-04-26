@@ -22,6 +22,8 @@ namespace WellWellWell.UI
                 GameHUD.Instance.ShowBuildingToolTip(this.m_buildingData as ProductionBuildingData);
             else if (this.m_buildingData.GetType() == typeof(CivilBuildingData))
                 GameHUD.Instance.ShowBuildingToolTip(this.m_buildingData as CivilBuildingData);
+            else if (this.m_buildingData.GetType() == typeof(BuildingData))
+                GameHUD.Instance.ShowBuildingToolTip(this.m_buildingData);
         }
 
         public void OnPointerExit(PointerEventData eventData)

@@ -29,4 +29,4 @@ MonoBehaviour:
     m_neededAmount: 100
   m_buildingsToUnlock:
   - {fileID: 0}
-  m_newProductionTime: 4
+  m_newProductionTime: 2.6

@@ -28,4 +28,4 @@ MonoBehaviour:
   m_buildingsToUnlock:
   - {fileID: 11400000, guid: edee246eb36398c4b9e41f75c993d4cf, type: 2}
   - {fileID: 11400000, guid: 212f3a4852c7a6145a8faad1a5337b66, type: 2}
-  m_newProductionTime: 6
+  m_newProductionTime: 5

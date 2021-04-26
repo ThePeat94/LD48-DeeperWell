@@ -324,7 +324,7 @@ MonoBehaviour:
   m_plusText: {fileID: 8590830954537535011}
   m_amountText: {fileID: 4843263245294120574}
   m_resourceIcon: {fileID: 4077659855492375910}
-  m_timeSprite: {fileID: 21300000, guid: 42e1830e8d0f18649b6855dddb529776, type: 3}
+  m_timeSprite: {fileID: 21300000, guid: 448a3ec751a28ae42b38c76f746fdeec, type: 3}
 --- !u!1 &7564222660513815209
 GameObject:
   m_ObjectHideFlags: 0

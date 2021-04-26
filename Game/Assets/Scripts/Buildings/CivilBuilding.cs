@@ -11,6 +11,7 @@ namespace WellWellWell
     public class CivilBuilding : Building
     {
         [SerializeField] private CivilBuildingData m_data;
+        private bool m_consume = true;
         private Coroutine m_consumptionCoroutine;
 
         private Dictionary<Resource, int> m_currentExtraInhibitantsPerResource;
@@ -36,10 +37,8 @@ namespace WellWellWell
             foreach (var cost in this.m_data.Costs)
                 cost.Type.ResourceController.Add(cost.Cost);
 
-            if (this.m_consumptionCoroutine != null)
-                this.StopCoroutine(this.m_consumptionCoroutine);
-
             this.m_data.Resource.ResourceController.CalulateDelta(-this.CurrentInhabitants);
+            this.m_consume = false;
             HouseManager.Instance.Remove(this);
             Destroy(this.gameObject);
         }
@@ -56,15 +55,17 @@ namespace WellWellWell
 
         private IEnumerator Consume()
         {
-            while (true)
+            while (this.m_consume)
             {
                 yield return new WaitForSeconds(1f);
                 foreach (var consumption in this.m_data.ConsumptionPerInhibitant)
-                    this.Consume(consumption);
+                    this.StartCoroutine(this.Consume(consumption));
             }
+
+            this.m_consumptionCoroutine = null;
         }
 
-        private void Consume(ResourceConsumption consumption)
+        private IEnumerator Consume(ResourceConsumption consumption)
         {
             var consumptionAmount = consumption.ConsumptionPerMinute * this.CurrentInhabitants / 60f;
             var oldAmount = this.CurrentInhabitants;
@@ -76,16 +77,19 @@ namespace WellWellWell
                     this.CurrentInhabitants -= this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
                     this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume] = consumption.ExtraInhibitants;
                     this.CurrentInhabitants += this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
+                    yield return new WaitForEndOfFrame();
                 }
             }
             else
             {
                 this.CurrentInhabitants -= this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
                 this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume] = 0;
+                yield return new WaitForEndOfFrame();
             }
 
             this.CurrentInhabitants = Mathf.Clamp(this.CurrentInhabitants, 0, this.m_data.MaxInhibitants);
             this.m_data.Resource.ResourceController.CalulateDelta(this.CurrentInhabitants - oldAmount);
+            yield return new WaitForEndOfFrame();
         }
     }
 }

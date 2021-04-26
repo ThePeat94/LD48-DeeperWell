@@ -22,7 +22,6 @@ namespace WellWellWell.UI
             this.ChangeActiveButtonTo(this.m_doubleSpeedButton);
         }
 
-
         public void OnNormalSpeedClicked()
         {
             Time.timeScale = 1;

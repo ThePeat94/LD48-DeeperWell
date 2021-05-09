@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5e7f7ba92024fe189e143cf33c88a71, type: 3}
+  m_Name: Noble House
+  m_EditorClassIdentifier: 
+  m_resource: {fileID: 11400000, guid: c7a4344d2bbd28042a6fde1486cfbecc, type: 2}
+  m_name: Aristocrat House
+  m_icon: {fileID: 21300000, guid: f54c8c587e8f98b4b983c24bac173dc5, type: 3}
+  m_costs:
+  - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
+    m_cost: 2
+  - m_type: {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
+    m_cost: 5
+  - m_type: {fileID: 11400000, guid: 9824db68f10591a4d97e41658962901a, type: 2}
+    m_cost: 7
+  m_toPlace: {fileID: 5017935496903132166, guid: 7a4e2f7ce97e55c438464a33b8dae99a, type: 3}
+  m_isInitiallyLocked: 1
+  m_consumptionPerInhibitant:
+  - m_resourceToConsume: {fileID: 11400000, guid: 2841c926493c8a846b3eb5c1e5d64959, type: 2}
+    m_consumptionPerMinute: 0.06
+    m_extraInhibitants: 10
+  - m_resourceToConsume: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
+    m_consumptionPerMinute: 0.05
+    m_extraInhibitants: 10
+  - m_resourceToConsume: {fileID: 11400000, guid: 50b874a55bad7c445950e6622c74329b, type: 2}
+    m_consumptionPerMinute: 0.05
+    m_extraInhibitants: 10
+  m_maxInhibitants: 30
+  m_extraInhabitantsIcon: {fileID: 21300000, guid: 9182f04e32fdb6f4ea7661a8f4f10ea4, type: 3}

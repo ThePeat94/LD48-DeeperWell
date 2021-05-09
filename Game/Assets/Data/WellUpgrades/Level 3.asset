@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5380a8a5a6044efeaf41022813f13b45, type: 3}
+  m_Name: Level 3
+  m_EditorClassIdentifier: 
+  m_followingUpgrade: {fileID: 11400000, guid: 520560f6af9a20a4daa23db86f4e14b7, type: 2}
+  m_resourceUnlockConditions:
+  - m_resource: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
+    m_amount: 10
+  - m_resource: {fileID: 11400000, guid: 634a59431f6de8745b70c7aa46a82661, type: 2}
+    m_amount: 5
+  m_populationUnlockConditions:
+  - m_populationResource: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
+    m_neededAmount: 75
+  m_buildingsToUnlock:
+  - {fileID: 11400000, guid: 870938291d6d66b4689aad27204da2b9, type: 2}
+  - {fileID: 11400000, guid: f685691ecb69a714fae1ea7b93737c08, type: 2}
+  m_newProductionTime: 6

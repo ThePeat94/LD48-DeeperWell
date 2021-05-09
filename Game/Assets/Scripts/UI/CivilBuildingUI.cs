@@ -12,6 +12,9 @@ namespace WellWellWell.UI
         [SerializeField] private TextMeshProUGUI m_currentPeasants;
         [SerializeField] private GameObject m_resourceInfoPrefab;
         [SerializeField] private GameObject m_resourceInfo;
+        [SerializeField] private GameObject m_consumptionInfoLayout;
+        [SerializeField] private GameObject m_consumptionInfoPrefab;
+        [SerializeField] private Image m_extraInhabitantsImage;
 
         private CivilBuilding m_buildingToDisplay;
         private Coroutine m_currentShowRoutine;
@@ -46,6 +49,9 @@ namespace WellWellWell.UI
         {
             foreach (Transform child in this.m_resourceInfo.transform)
                 Destroy(child.gameObject);
+            
+            foreach (Transform child in this.m_consumptionInfoLayout.transform)
+                Destroy(child.gameObject);
         }
 
         private void PeasantsAmountChanged(object sender, ResourceValueChangedEvent args)
@@ -59,14 +65,14 @@ namespace WellWellWell.UI
             this.m_title.text = this.m_buildingToDisplay.Data.Name;
             this.m_currentPeasants.text = $"{this.m_buildingToDisplay.CurrentInhabitants}/{this.m_buildingToDisplay.Data.MaxInhibitants}";
             this.m_inhabitantIcon.sprite = this.m_buildingToDisplay.Data.Icon;
-
+            this.m_extraInhabitantsImage.sprite = this.m_buildingToDisplay.Data.ExtraInhabitantsIcon;
             foreach (var consumption in this.m_buildingToDisplay.Data.ConsumptionPerInhibitant)
             {
-                var currentConsumptionPerMinute = consumption.ConsumptionPerMinute * this.m_buildingToDisplay.CurrentInhabitants;
-                var currentExtra = this.m_buildingToDisplay.GetCurrentExtraInhabitantsForResource(consumption.ResourceToConsume);
+                var instantiatedResourceInfo = Instantiate(this.m_resourceInfoPrefab, this.m_resourceInfo.transform).GetComponent<PeasantResourceInfo>();
+                instantiatedResourceInfo.ShowConsumption(this.m_buildingToDisplay, consumption);
 
-                var instantiatedInfo = Instantiate(this.m_resourceInfoPrefab, this.m_resourceInfo.transform).GetComponent<PeasantResourceInfo>();
-                instantiatedInfo.ShowConsumption(currentExtra, consumption.ResourceToConsume.Icon, currentConsumptionPerMinute);
+                var instantiatedConsumptionInfo = Instantiate(this.m_consumptionInfoPrefab, this.m_consumptionInfoLayout.transform).GetComponent<PeasantConsumptionInfo>();
+                instantiatedConsumptionInfo.Show(this.m_buildingToDisplay, consumption);
             }
         }
     }

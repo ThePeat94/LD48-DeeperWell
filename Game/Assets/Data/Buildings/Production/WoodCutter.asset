@@ -15,9 +15,7 @@ MonoBehaviour:
   m_resource: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
   m_name: Woodcutter
   m_icon: {fileID: 21300000, guid: af8fe14468f16d84f97cfefcab5d932c, type: 3}
-  m_costs:
-  - m_type: {fileID: 11400000, guid: 779b176ba743c4848a75323a32d5aaaa, type: 2}
-    m_cost: 0
+  m_costs: []
   m_toPlace: {fileID: 7093497569765582562, guid: acb935083b8e2e342b54c3d14352319e, type: 3}
   m_isInitiallyLocked: 0
   m_needsToProduce: []

@@ -1,5 +1,6 @@
 ﻿using Scriptables;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace WellWellWell.UI
 {
@@ -15,6 +16,7 @@ namespace WellWellWell.UI
         [SerializeField] private GameObject m_storageLayout;
         [SerializeField] private GameObject m_separatorImagePrefab;
         [SerializeField] private StreetUI m_streetUI;
+        [SerializeField] private GameObject m_winScreen;
 
 
         public static GameHUD Instance
@@ -104,6 +106,26 @@ namespace WellWellWell.UI
             var newStorageDisplay = Instantiate(this.m_storageDisplayPrefab, this.m_storageLayout.transform).GetComponent<ResourceUI>();
             newStorageDisplay.Show(toShow);
             Instantiate(this.m_separatorImagePrefab, this.m_storageLayout.transform);
+        }
+
+        public void ShowWinScreen()
+        {
+            this.m_winScreen.SetActive(true);
+        }
+
+        public void CloseWinScreen()
+        {
+            this.m_winScreen.SetActive(false);
+        }
+
+        public void BackToMainMenu()
+        {
+            SceneManager.LoadScene(0);
+        }
+
+        public void CloseGame()
+        {
+            Application.Quit();
         }
     }
 }

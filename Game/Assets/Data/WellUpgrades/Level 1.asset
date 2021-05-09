@@ -18,7 +18,7 @@ MonoBehaviour:
     m_amount: 5
   m_populationUnlockConditions:
   - m_populationResource: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
-    m_neededAmount: 25
+    m_neededAmount: 20
   m_buildingsToUnlock:
   - {fileID: 11400000, guid: ec533f995e5bd2a4ea70d47c8bd80af4, type: 2}
   m_newProductionTime: 20

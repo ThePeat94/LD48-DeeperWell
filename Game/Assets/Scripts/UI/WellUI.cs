@@ -42,6 +42,7 @@ namespace WellWellWell.UI
             this.UpdateWellInfo();
             if (this.m_well.CurrentUpgradeInfo == null)
                 return;
+            
 
             this.SubscribeToResourceChanges();
         }

@@ -25,7 +25,7 @@ namespace WellWellWell.UI
 
         public void ShowTime(float time, bool showPlus)
         {
-            this.m_amountText.text = $"{time:0}";
+            this.m_amountText.text = $"{time:0}s";
             this.m_plusText.text = showPlus ? "+" : string.Empty;
             this.m_resourceIcon.sprite = this.m_timeSprite;
         }

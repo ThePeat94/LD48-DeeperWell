@@ -48,6 +48,11 @@ namespace WellWellWell
             return this.m_currentExtraInhibitantsPerResource[resource];
         }
 
+        public int GetMaxExtraInhabitantsForResource(Resource resource)
+        {
+            return this.m_data.ConsumptionPerInhibitant.First(r => r.ResourceToConsume == resource).ExtraInhibitants;
+        }
+
         public override void ShowUI()
         {
             GameHUD.Instance.ShowCivilBuildingUI(this);
@@ -59,13 +64,16 @@ namespace WellWellWell
             {
                 yield return new WaitForSeconds(1f);
                 foreach (var consumption in this.m_data.ConsumptionPerInhibitant)
-                    this.StartCoroutine(this.Consume(consumption));
+                {
+                    this.Consume(consumption);
+                    yield return new WaitForEndOfFrame();
+                }
             }
 
             this.m_consumptionCoroutine = null;
         }
 
-        private IEnumerator Consume(ResourceConsumption consumption)
+        private void Consume(ResourceConsumption consumption)
         {
             var consumptionAmount = consumption.ConsumptionPerMinute * this.CurrentInhabitants / 60f;
             var oldAmount = this.CurrentInhabitants;
@@ -77,19 +85,16 @@ namespace WellWellWell
                     this.CurrentInhabitants -= this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
                     this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume] = consumption.ExtraInhibitants;
                     this.CurrentInhabitants += this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
-                    yield return new WaitForEndOfFrame();
                 }
             }
             else
             {
                 this.CurrentInhabitants -= this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume];
                 this.m_currentExtraInhibitantsPerResource[consumption.ResourceToConsume] = 0;
-                yield return new WaitForEndOfFrame();
             }
 
             this.CurrentInhabitants = Mathf.Clamp(this.CurrentInhabitants, 0, this.m_data.MaxInhibitants);
             this.m_data.Resource.ResourceController.CalulateDelta(this.CurrentInhabitants - oldAmount);
-            yield return new WaitForEndOfFrame();
         }
     }
 }

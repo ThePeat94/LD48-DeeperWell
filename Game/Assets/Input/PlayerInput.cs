@@ -5,24 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
-using Object = UnityEngine.Object;
 
-public class PlayerInput : IInputActionCollection, IDisposable
+public class @PlayerInput : IInputActionCollection, IDisposable
 {
-    // Actions
-    private readonly InputActionMap m_Actions;
-    private readonly InputAction m_Actions_CameraMovement;
-    private readonly InputAction m_Actions_Click;
-    private readonly InputAction m_Actions_Destroy;
-    private readonly InputAction m_Actions_MousePosition;
-    private readonly InputAction m_Actions_RightClick;
-    private readonly InputAction m_Actions_Rotate;
-    private readonly InputAction m_Actions_Sprint;
-    private IActionsActions m_ActionsActionsCallbackInterface;
-
-    public PlayerInput()
+    public InputActionAsset asset { get; }
+    public @PlayerInput()
     {
-        this.asset = InputActionAsset.FromJson(@"{
+        asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInput"",
     ""maps"": [
         {
@@ -81,6 +70,14 @@ public class PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""f3612a7d-086e-4d14-86fe-d037e17ba2a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""42d0c954-d71c-4760-8de0-cfc6e74ece9a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -218,6 +215,17 @@ public class PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a3db9841-fe0c-42b6-974a-2c65fb026f15"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,165 +233,158 @@ public class PlayerInput : IInputActionCollection, IDisposable
     ""controlSchemes"": []
 }");
         // Actions
-        this.m_Actions = this.asset.FindActionMap("Actions", true);
-        this.m_Actions_Click = this.m_Actions.FindAction("Click", true);
-        this.m_Actions_RightClick = this.m_Actions.FindAction("RightClick", true);
-        this.m_Actions_Rotate = this.m_Actions.FindAction("Rotate", true);
-        this.m_Actions_Destroy = this.m_Actions.FindAction("Destroy", true);
-        this.m_Actions_MousePosition = this.m_Actions.FindAction("MousePosition", true);
-        this.m_Actions_CameraMovement = this.m_Actions.FindAction("CameraMovement", true);
-        this.m_Actions_Sprint = this.m_Actions.FindAction("Sprint", true);
+        m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
+        m_Actions_Click = m_Actions.FindAction("Click", throwIfNotFound: true);
+        m_Actions_RightClick = m_Actions.FindAction("RightClick", throwIfNotFound: true);
+        m_Actions_Rotate = m_Actions.FindAction("Rotate", throwIfNotFound: true);
+        m_Actions_Destroy = m_Actions.FindAction("Destroy", throwIfNotFound: true);
+        m_Actions_MousePosition = m_Actions.FindAction("MousePosition", throwIfNotFound: true);
+        m_Actions_CameraMovement = m_Actions.FindAction("CameraMovement", throwIfNotFound: true);
+        m_Actions_Sprint = m_Actions.FindAction("Sprint", throwIfNotFound: true);
+        m_Actions_Quit = m_Actions.FindAction("Quit", throwIfNotFound: true);
     }
-
-    public InputActionAsset asset { get; }
-    public ActionsActions Actions => new ActionsActions(this);
 
     public void Dispose()
     {
-        Object.Destroy(this.asset);
+        UnityEngine.Object.Destroy(asset);
     }
 
     public InputBinding? bindingMask
     {
-        get => this.asset.bindingMask;
-        set => this.asset.bindingMask = value;
+        get => asset.bindingMask;
+        set => asset.bindingMask = value;
     }
 
     public ReadOnlyArray<InputDevice>? devices
     {
-        get => this.asset.devices;
-        set => this.asset.devices = value;
+        get => asset.devices;
+        set => asset.devices = value;
     }
 
-    public ReadOnlyArray<InputControlScheme> controlSchemes => this.asset.controlSchemes;
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
 
     public bool Contains(InputAction action)
     {
-        return this.asset.Contains(action);
+        return asset.Contains(action);
     }
 
     public IEnumerator<InputAction> GetEnumerator()
     {
-        return this.asset.GetEnumerator();
+        return asset.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return this.GetEnumerator();
+        return GetEnumerator();
     }
 
     public void Enable()
     {
-        this.asset.Enable();
+        asset.Enable();
     }
 
     public void Disable()
     {
-        this.asset.Disable();
+        asset.Disable();
     }
 
+    // Actions
+    private readonly InputActionMap m_Actions;
+    private IActionsActions m_ActionsActionsCallbackInterface;
+    private readonly InputAction m_Actions_Click;
+    private readonly InputAction m_Actions_RightClick;
+    private readonly InputAction m_Actions_Rotate;
+    private readonly InputAction m_Actions_Destroy;
+    private readonly InputAction m_Actions_MousePosition;
+    private readonly InputAction m_Actions_CameraMovement;
+    private readonly InputAction m_Actions_Sprint;
+    private readonly InputAction m_Actions_Quit;
     public struct ActionsActions
     {
-        private readonly PlayerInput m_Wrapper;
-
-        public ActionsActions(PlayerInput wrapper)
-        {
-            this.m_Wrapper = wrapper;
-        }
-
-        public InputAction Click => this.m_Wrapper.m_Actions_Click;
-        public InputAction RightClick => this.m_Wrapper.m_Actions_RightClick;
-        public InputAction Rotate => this.m_Wrapper.m_Actions_Rotate;
-        public InputAction Destroy => this.m_Wrapper.m_Actions_Destroy;
-        public InputAction MousePosition => this.m_Wrapper.m_Actions_MousePosition;
-        public InputAction CameraMovement => this.m_Wrapper.m_Actions_CameraMovement;
-        public InputAction Sprint => this.m_Wrapper.m_Actions_Sprint;
-
-        public InputActionMap Get()
-        {
-            return this.m_Wrapper.m_Actions;
-        }
-
-        public void Enable()
-        {
-            this.Get().Enable();
-        }
-
-        public void Disable()
-        {
-            this.Get().Disable();
-        }
-
-        public bool enabled => this.Get().enabled;
-
-        public static implicit operator InputActionMap(ActionsActions set)
-        {
-            return set.Get();
-        }
-
+        private @PlayerInput m_Wrapper;
+        public ActionsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_Actions_Click;
+        public InputAction @RightClick => m_Wrapper.m_Actions_RightClick;
+        public InputAction @Rotate => m_Wrapper.m_Actions_Rotate;
+        public InputAction @Destroy => m_Wrapper.m_Actions_Destroy;
+        public InputAction @MousePosition => m_Wrapper.m_Actions_MousePosition;
+        public InputAction @CameraMovement => m_Wrapper.m_Actions_CameraMovement;
+        public InputAction @Sprint => m_Wrapper.m_Actions_Sprint;
+        public InputAction @Quit => m_Wrapper.m_Actions_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_Actions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionsActions set) { return set.Get(); }
         public void SetCallbacks(IActionsActions instance)
         {
-            if (this.m_Wrapper.m_ActionsActionsCallbackInterface != null)
+            if (m_Wrapper.m_ActionsActionsCallbackInterface != null)
             {
-                this.Click.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
-                this.Click.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
-                this.Click.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
-                this.RightClick.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
-                this.RightClick.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
-                this.RightClick.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
-                this.Rotate.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
-                this.Rotate.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
-                this.Rotate.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
-                this.Destroy.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
-                this.Destroy.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
-                this.Destroy.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
-                this.MousePosition.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
-                this.MousePosition.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
-                this.MousePosition.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
-                this.CameraMovement.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
-                this.CameraMovement.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
-                this.CameraMovement.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
-                this.Sprint.started -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
-                this.Sprint.performed -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
-                this.Sprint.canceled -= this.m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Click.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnClick;
+                @RightClick.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @RightClick.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @RightClick.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRightClick;
+                @Rotate.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnRotate;
+                @Destroy.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @Destroy.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @Destroy.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnDestroy;
+                @MousePosition.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnMousePosition;
+                @CameraMovement.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
+                @CameraMovement.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
+                @CameraMovement.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnCameraMovement;
+                @Sprint.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Sprint.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Sprint.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnSprint;
+                @Quit.started -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_ActionsActionsCallbackInterface.OnQuit;
             }
-
-            this.m_Wrapper.m_ActionsActionsCallbackInterface = instance;
+            m_Wrapper.m_ActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                this.Click.started += instance.OnClick;
-                this.Click.performed += instance.OnClick;
-                this.Click.canceled += instance.OnClick;
-                this.RightClick.started += instance.OnRightClick;
-                this.RightClick.performed += instance.OnRightClick;
-                this.RightClick.canceled += instance.OnRightClick;
-                this.Rotate.started += instance.OnRotate;
-                this.Rotate.performed += instance.OnRotate;
-                this.Rotate.canceled += instance.OnRotate;
-                this.Destroy.started += instance.OnDestroy;
-                this.Destroy.performed += instance.OnDestroy;
-                this.Destroy.canceled += instance.OnDestroy;
-                this.MousePosition.started += instance.OnMousePosition;
-                this.MousePosition.performed += instance.OnMousePosition;
-                this.MousePosition.canceled += instance.OnMousePosition;
-                this.CameraMovement.started += instance.OnCameraMovement;
-                this.CameraMovement.performed += instance.OnCameraMovement;
-                this.CameraMovement.canceled += instance.OnCameraMovement;
-                this.Sprint.started += instance.OnSprint;
-                this.Sprint.performed += instance.OnSprint;
-                this.Sprint.canceled += instance.OnSprint;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @Destroy.started += instance.OnDestroy;
+                @Destroy.performed += instance.OnDestroy;
+                @Destroy.canceled += instance.OnDestroy;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+                @CameraMovement.started += instance.OnCameraMovement;
+                @CameraMovement.performed += instance.OnCameraMovement;
+                @CameraMovement.canceled += instance.OnCameraMovement;
+                @Sprint.started += instance.OnSprint;
+                @Sprint.performed += instance.OnSprint;
+                @Sprint.canceled += instance.OnSprint;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
             }
         }
     }
-
+    public ActionsActions @Actions => new ActionsActions(this);
     public interface IActionsActions
     {
-        void OnCameraMovement(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
-        void OnDestroy(InputAction.CallbackContext context);
-        void OnMousePosition(InputAction.CallbackContext context);
         void OnRightClick(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnDestroy(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnCameraMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
 }

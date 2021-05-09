@@ -20,6 +20,8 @@ MonoBehaviour:
     m_amount: 15
   - m_resource: {fileID: 11400000, guid: 9824db68f10591a4d97e41658962901a, type: 2}
     m_amount: 20
+  - m_resource: {fileID: 11400000, guid: 50b874a55bad7c445950e6622c74329b, type: 2}
+    m_amount: 5
   m_populationUnlockConditions:
   - m_populationResource: {fileID: 11400000, guid: c40d7815587542843813499245e9017d, type: 2}
     m_neededAmount: 100
@@ -27,6 +29,5 @@ MonoBehaviour:
     m_neededAmount: 100
   - m_populationResource: {fileID: 11400000, guid: c7a4344d2bbd28042a6fde1486cfbecc, type: 2}
     m_neededAmount: 75
-  m_buildingsToUnlock:
-  - {fileID: 0}
-  m_newProductionTime: 3
+  m_buildingsToUnlock: []
+  m_newProductionTime: 1

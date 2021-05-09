@@ -10,6 +10,11 @@ namespace WellWellWell.UI
         [SerializeField] private GameObject m_neededResourcesLayout;
         [SerializeField] private Image m_resultImage;
         [SerializeField] private GameObject m_neededResourcePrefab;
+        [SerializeField] private Image m_buildingIcon;
+        [SerializeField] private Button m_toggleWorkButton;
+
+        [SerializeField] private Sprite m_pausedSprite;
+        [SerializeField] private Sprite m_workingSprite;
 
         private ProductionBuilding m_currentDisplayedBuilding;
 
@@ -48,12 +53,15 @@ namespace WellWellWell.UI
             timeRow.ShowTime(this.m_currentDisplayedBuilding.Data.SecondsToProduce, showTimePlus);
 
             this.m_resultImage.sprite = this.m_currentDisplayedBuilding.Data.Resource.Icon;
+            this.m_buildingIcon.sprite = building.Data.Icon;
+            this.m_toggleWorkButton.image.sprite = this.m_pausedSprite;
             this.gameObject.SetActive(true);
         }
 
         public void ToggleCurrentBuilding()
         {
             this.m_currentDisplayedBuilding.ToggleProduction();
+            this.m_toggleWorkButton.image.sprite = this.m_currentDisplayedBuilding.IsPaused ? this.m_workingSprite : this.m_pausedSprite;
         }
 
         private void ClearNeededResources()

@@ -8,10 +8,10 @@ namespace WellWellWell
 {
     public class ProductionBuilding : Building
     {
-        [SerializeField] private ProductionBuildingData m_data;
+        [SerializeField] protected ProductionBuildingData m_data;
 
         protected float m_currentProductionTimer;
-        private Coroutine m_productionRoutine;
+        protected Coroutine m_productionRoutine;
 
         private WaitForSeconds m_waitForSeconds;
 
@@ -45,8 +45,11 @@ namespace WellWellWell
             foreach (var cost in this.m_data.Costs)
                 cost.Type.ResourceController.Add(cost.Cost);
 
-            this.StopCoroutine(this.m_productionRoutine);
-            this.m_data.WorkforceConsumption.HumanResource.ResourceController.Add(this.m_data.WorkforceConsumption.Amount);
+            if(this.m_productionRoutine != null)
+                this.StopCoroutine(this.m_productionRoutine);
+            
+            if(!this.IsPaused)
+                this.m_data.WorkforceConsumption.HumanResource.ResourceController.Add(this.m_data.WorkforceConsumption.Amount);
             Destroy(this.gameObject);
         }
 
@@ -72,7 +75,7 @@ namespace WellWellWell
                 this.Pause();
         }
 
-        private IEnumerator Produce()
+        protected virtual IEnumerator Produce()
         {
             if (this.m_data.NeedsToProduce.Length > 0)
             {

@@ -26,7 +26,7 @@ MonoBehaviour:
   m_isInitiallyLocked: 1
   m_consumptionPerInhibitant:
   - m_resourceToConsume: {fileID: 11400000, guid: 2841c926493c8a846b3eb5c1e5d64959, type: 2}
-    m_consumptionPerMinute: 0.05
+    m_consumptionPerMinute: 0.06
     m_extraInhibitants: 10
   - m_resourceToConsume: {fileID: 11400000, guid: c6f802973995c3f46ac18cb55c6eda34, type: 2}
     m_consumptionPerMinute: 0.05
@@ -35,3 +35,4 @@ MonoBehaviour:
     m_consumptionPerMinute: 0.05
     m_extraInhibitants: 10
   m_maxInhibitants: 30
+  m_extraInhabitantsIcon: {fileID: 21300000, guid: 9182f04e32fdb6f4ea7661a8f4f10ea4, type: 3}

@@ -19,7 +19,7 @@ namespace WellWellWell.UI
 
         public void ShowProductionTime(WellUpgradeData toShow)
         {
-            this.m_rewardText.text = $"This production time: {toShow.NewProductionTime}s";
+            this.m_rewardText.text = $"Well: {toShow.NewProductionTime}s";
             this.m_image.sprite = this.m_timerIcon;
         }
     }

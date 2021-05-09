@@ -39,6 +39,12 @@ namespace WellWellWell
         private void Update()
         {
             this.Movement = this.m_playerInput.Actions.CameraMovement.ReadValue<Vector2>().normalized;
+
+            if (this.m_playerInput.Actions.Quit.triggered)
+            {
+                Application.Quit();
+                return;
+            }
         }
 
         private void OnEnable()

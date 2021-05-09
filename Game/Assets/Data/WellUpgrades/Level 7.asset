@@ -26,4 +26,4 @@ MonoBehaviour:
   - m_populationResource: {fileID: 11400000, guid: c7a4344d2bbd28042a6fde1486cfbecc, type: 2}
     m_neededAmount: 25
   m_buildingsToUnlock: []
-  m_newProductionTime: 4.285
+  m_newProductionTime: 1.5

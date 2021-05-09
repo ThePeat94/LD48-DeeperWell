@@ -6,7 +6,6 @@ namespace WellWellWell
 {
     public class ResourceController
     {
-        private readonly object m_lock;
         private EventHandler<ResourceValueChangedEvent> m_maxValueChanged;
         private EventHandler<ResourceValueChangedEvent> m_resourceValueChanged;
 
@@ -14,7 +13,6 @@ namespace WellWellWell
         {
             this.MaxValue = data.InitMaxValue;
             this.CurrentValue = data.StartValue;
-            this.m_lock = new object();
         }
 
         public float CurrentValue { get; private set; }
@@ -25,21 +23,13 @@ namespace WellWellWell
             if (value < 0)
                 throw new ArgumentException($"{nameof(value)} is less than 0");
 
-            lock (this.m_lock)
-            {
-                this.CurrentValue = Mathf.Clamp(this.CurrentValue + value, 0, this.MaxValue);
-            }
-
+            this.CurrentValue = Mathf.Clamp(this.CurrentValue + value, 0, this.MaxValue);
             this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
         }
 
         public void CalulateDelta(float amount)
         {
-            lock (this.m_lock)
-            {
-                this.CurrentValue += amount;
-            }
-
+            this.CurrentValue += amount;
             this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
         }
 
@@ -47,23 +37,15 @@ namespace WellWellWell
         {
             if (amount < 0)
                 throw new ArgumentException($"{nameof(amount)} is less than 0");
-
-            lock (this.m_lock)
-            {
-                return this.CurrentValue >= 0 && amount <= this.CurrentValue;
-            }
+            
+            return this.CurrentValue >= 0 && amount <= this.CurrentValue;
         }
 
         public void IncreaseMaximum(float value)
         {
             if (value < 0)
                 throw new ArgumentException($"{nameof(value)} is less than 0");
-
-            lock (this.m_lock)
-            {
-                this.MaxValue += value;
-            }
-
+            this.MaxValue += value;
             this.m_maxValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.MaxValue));
         }
 
@@ -78,11 +60,7 @@ namespace WellWellWell
             if (value < 0)
                 throw new ArgumentException($"{nameof(value)} is less than 0");
 
-            lock (this.m_lock)
-            {
-                this.CurrentValue = Mathf.Clamp(value, 0, this.MaxValue);
-            }
-
+            this.CurrentValue = Mathf.Clamp(value, 0, this.MaxValue);
             this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
         }
 
@@ -90,13 +68,10 @@ namespace WellWellWell
         {
             if (amount < 0)
                 throw new ArgumentException($"{nameof(amount)} is less than 0");
-
-            lock (this.m_lock)
-            {
-                if (amount > this.CurrentValue)
-                    return false;
-                this.CurrentValue -= amount;
-            }
+            
+            if (amount > this.CurrentValue)
+                return false;
+            this.CurrentValue -= amount;
 
             this.m_resourceValueChanged?.Invoke(this, new ResourceValueChangedEvent(this.CurrentValue));
             return true;

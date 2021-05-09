@@ -9,13 +9,12 @@ namespace WellWellWell.UI
     {
         [SerializeField] private TextMeshProUGUI m_currentExtraPesantsAmount;
         [SerializeField] private Image m_resourceIcon;
-        [SerializeField] private TextMeshProUGUI m_consumptionPerMinute;
 
-        public void ShowConsumption(int extraAmount, Sprite resourceIcon, float consumptionPerMinute)
+        public void ShowConsumption(CivilBuilding building, ResourceConsumption consumption)
         {
-            this.m_currentExtraPesantsAmount.text = $"{extraAmount:+#;-#;0}";
-            this.m_resourceIcon.sprite = resourceIcon;
-            this.m_consumptionPerMinute.text = $"{consumptionPerMinute:F}";
+            var extraAmount = building.GetCurrentExtraInhabitantsForResource(consumption.ResourceToConsume);
+            this.m_currentExtraPesantsAmount.text = $"{extraAmount:+#;-#;0}/+{consumption.ExtraInhibitants}";
+            this.m_resourceIcon.sprite = consumption.ResourceToConsume.Icon;
         }
     }
 }

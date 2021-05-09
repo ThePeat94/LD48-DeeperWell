@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using Scriptables;
 using UnityEngine;
 using WellWellWell.UI;
@@ -41,6 +42,18 @@ namespace WellWellWell
 
             this.CurrentLevel++;
             this.m_wellUpgradeData = this.m_wellUpgradeData.FollowingUpgrade;
+
+            if (this.m_wellUpgradeData == null)
+            {
+                GameHUD.Instance.ShowWinScreen();
+            }
+        }
+
+        protected override IEnumerator Produce()
+        {
+            yield return new WaitForEndOfFrame();
+            this.m_data.Resource.ResourceController.Add(1f/this.m_currentProductionTimer * Time.deltaTime);
+            this.m_productionRoutine = null;
         }
     }
 }
